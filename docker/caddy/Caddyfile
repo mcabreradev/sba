@@ -1,0 +1,9 @@
+saddle.local:80 {
+  reverse_proxy next-app:3000
+}
+
+# # Personal website using HTTPS
+# saddle.local:443 {
+#   tls internal
+#   reverse_proxy next-app:3000
+# }

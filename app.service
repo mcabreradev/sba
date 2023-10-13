@@ -1,0 +1,15 @@
+[Unit]
+Description=Docker Compose Your Service Name
+Requires=snap.docker.dockerd.service
+After=snap.docker.dockerd.service
+
+[Service]
+WorkingDirectory=/root/webpage
+ExecStart=/snap/bin/docker-compose -f /root/webpage/docker-compose.yml up -d
+ExecStop=/snap/bin/docker-compose -f /root/webpage/docker-compose.yml down
+Type=oneshot
+RemainAfterExit=true
+StandardOutput=syslog
+
+[Install]
+WantedBy=multi-user.target

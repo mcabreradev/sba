@@ -1,0 +1,168 @@
+version: '3'
+
+services:
+  next-app:
+    container_name: next-app
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+      args:
+        ENV_VARIABLE: ${ENV_VARIABLE}
+        NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - saddle-network
+
+  caddy:
+    image: caddy/caddy:latest
+    container_name: caddy
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./docker/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - saddle-network
+    depends_on:
+      - next-app
+    restart: always
+
+  pgsql:
+    image: 'postgres:15'
+    ports:
+      - '${FORWARD_DB_PORT:-5432}:5432'
+    environment:
+      PGPASSWORD: '${DB_PASSWORD:-secret}'
+      POSTGRES_DB: '${DB_DATABASE}'
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+    volumes:
+      - 'saddle-pgsql:/var/lib/postgresql/data'
+    networks:
+      - saddle-network
+    healthcheck:
+      test:
+        - CMD
+        - pg_isready
+        - '-q'
+        - '-d'
+        - '${DB_DATABASE}'
+        - '-U'
+        - '${DB_USERNAME}'
+      retries: 3
+      timeout: 5s
+
+  redis:
+    image: 'redis:alpine'
+    ports:
+      - '${FORWARD_REDIS_PORT:-6379}:6379'
+    volumes:
+      - 'saddle-redis:/data'
+    networks:
+      - saddle-network
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - ping
+      retries: 3
+      timeout: 5s
+
+  # meilisearch:
+  #   image: 'getmeili/meilisearch:latest'
+  #   ports:
+  #     - '${FORWARD_MEILISEARCH_PORT:-7700}:7700'
+  #   environment:
+  #     MEILI_NO_ANALYTICS: '${MEILISEARCH_NO_ANALYTICS:-false}'
+  #   volumes:
+  #     - 'saddle-meilisearch:/meili_data'
+  #   networks:
+  #     - saddle-network
+  #   healthcheck:
+  #     test:
+  #       - CMD
+  #       - wget
+  #       - '--no-verbose'
+  #       - '--spider'
+  #       - 'http://localhost:7700/health'
+  #     retries: 3
+  #     timeout: 5s
+
+  # mailpit:
+  #   image: 'axllent/mailpit:latest'
+  #   ports:
+  #     - '${FORWARD_MAILPIT_PORT:-1025}:1025'
+  #     - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
+  #   networks:
+  #     - saddle-network
+
+  # elasticsearch:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:7.17.13
+  #   container_name: elasticsearch
+  #   environment:
+  #     - discovery.type=single-node
+  #     - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+  #   ports:
+  #     - '9200:9200'
+  #     - '9300:9300'
+  #   networks:
+  #     - saddle-network
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 1024M
+
+  # logstash:
+  #   image: docker.elastic.co/logstash/logstash:7.17.13
+  #   volumes:
+  #     - ./docker/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+  #     - ./docker/logstash/pipeline:/usr/share/logstash/pipeline:ro
+  #   ports:
+  #     - '12201:12201/udp'
+  #   environment:
+  #     LS_JAVA_OPTS: '-Xmx256m -Xms256m'
+  #   depends_on:
+  #     - elasticsearch
+  #   networks:
+  #     - saddle-network
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 512M
+
+  # kibana:
+  #   image: docker.elastic.co/kibana/kibana:7.17.13
+  #   container_name: kibana
+  #   ports:
+  #     - '5601:5601'
+  #   networks:
+  #     - saddle-network
+  #   volumes:
+  #     - ./docker/kibana/config/:/usr/share/kibana/config:ro
+  #   depends_on:
+  #     - logstash
+  #     - elasticsearch
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+    ports:
+      - '8080:8080'
+
+networks:
+  saddle-network:
+    driver: bridge
+
+volumes:
+  saddle-pgsql:
+  saddle-redis:
+  saddle-meilisearch:
+  caddy_data:
+  caddy_config:
