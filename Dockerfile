@@ -3,11 +3,11 @@ ARG NODE_IMAGE=imbios/bun-node:18-alpine
 FROM $NODE_IMAGE AS deps
 WORKDIR /app
 
-COPY package.json yarn.lock ./
+COPY package.json bun.lockb ./
 
 # RUN yarn config set network-timeout 600000 -g
 # RUN yarn install --frozen-lockfile
-RUN bun install
+RUN bun install --frozen-lockfile
 
 FROM $NODE_IMAGE AS builder
 WORKDIR /app

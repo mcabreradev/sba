@@ -1,9 +1,16 @@
-saddle.local:80 {
+{
+	email yo@mcabrera.dev
+}
+
+saddle.local {
   reverse_proxy next-app:3000
 }
 
-# # Personal website using HTTPS
-# saddle.local:443 {
+saddlebackbsas.com {
+  reverse_proxy next-app:3000
+}
+
+# saddlebackbsas.com:443 {
 #   tls internal
 #   reverse_proxy next-app:3000
 # }
