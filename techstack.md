@@ -1,7 +1,8 @@
 <!--
---- Readme.md Snippet without images Start ---
+&lt;--- Readme.md Snippet without images Start ---&gt;
 ## Tech Stack
 mcabreradev/sba is built on the following main stack:
+
 - [Jest](http://facebook.github.io/jest/) – Javascript Testing Framework
 - [Elasticsearch](https://www.elastic.co/products/elasticsearch) – Search as a Service
 - [React](https://reactjs.org/) – Javascript UI Libraries
@@ -20,11 +21,13 @@ mcabreradev/sba is built on the following main stack:
 - [Docker](https://www.docker.com/) – Virtual Machine Platforms & Containers
 
 Full tech stack [here](/techstack.md)
---- Readme.md Snippet without images End ---
 
---- Readme.md Snippet with images Start ---
+&lt;--- Readme.md Snippet without images End ---&gt;
+
+&lt;--- Readme.md Snippet with images Start ---&gt;
 ## Tech Stack
 mcabreradev/sba is built on the following main stack:
+
 - <img width='25' height='25' src='https://img.stackshare.io/service/830/jest.png' alt='Jest'/> [Jest](http://facebook.github.io/jest/) – Javascript Testing Framework
 - <img width='25' height='25' src='https://img.stackshare.io/service/841/Image_2019-05-20_at_4.58.04_PM.png' alt='Elasticsearch'/> [Elasticsearch](https://www.elastic.co/products/elasticsearch) – Search as a Service
 - <img width='25' height='25' src='https://img.stackshare.io/service/1020/OYIaJ1KK.png' alt='React'/> [React](https://reactjs.org/) – Javascript UI Libraries
@@ -43,14 +46,15 @@ mcabreradev/sba is built on the following main stack:
 - <img width='25' height='25' src='https://img.stackshare.io/service/586/n4u37v9t_400x400.png' alt='Docker'/> [Docker](https://www.docker.com/) – Virtual Machine Platforms & Containers
 
 Full tech stack [here](/techstack.md)
---- Readme.md Snippet with images End ---
+
+&lt;--- Readme.md Snippet with images End ---&gt;
 -->
 <div align="center">
 
 # Tech Stack File
 ![](https://img.stackshare.io/repo.svg "repo") [mcabreradev/sba](https://github.com/mcabreradev/sba)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
-|34<br/>Tools used|11/14/23 <br/>Report generated|
+|36<br/>Tools used|01/05/24 <br/>Report generated|
 |------|------|
 </div>
 
@@ -245,9 +249,9 @@ Full tech stack [here](/techstack.md)
 </table>
 
 
-## <img src='https://img.stackshare.io/group.svg' /> Open source packages (13)</h2>
+## <img src='https://img.stackshare.io/group.svg' /> Open source packages (15)</h2>
 
-## <img width='24' height='24' src='https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png'/> npm (13)
+## <img width='24' height='24' src='https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png'/> npm (15)
 
 |NAME|VERSION|LAST UPDATED|LAST UPDATED BY|LICENSE|VULNERABILITIES|
 |:------|:------|:------|:------|:------|:------|
@@ -260,6 +264,8 @@ Full tech stack [here](/techstack.md)
 |[@typescript-eslint/eslint-plugin](https://www.npmjs.com/@typescript-eslint/eslint-plugin)|v5.62.0|10/27/23|Miguelangel Cabrera |MIT|N/A|
 |[@typescript-eslint/parser](https://www.npmjs.com/@typescript-eslint/parser)|v5.62.0|10/27/23|Miguelangel Cabrera |BSD-2-Clause|N/A|
 |[eslint-config-prettier](https://www.npmjs.com/eslint-config-prettier)|v8.10.0|10/27/23|Miguelangel Cabrera |MIT|N/A|
+|[husky](https://www.npmjs.com/husky)|v7.0.4|10/27/23|Miguelangel Cabrera |MIT|N/A|
+|[lint-staged](https://www.npmjs.com/lint-staged)|v12.5.0|10/27/23|Miguelangel Cabrera |MIT|N/A|
 |[postcss](https://www.npmjs.com/postcss)|v8.4.31|10/27/23|Miguelangel Cabrera |MIT|N/A|
 |[react-dom](https://www.npmjs.com/react-dom)|v18.2.0|10/27/23|Miguelangel Cabrera |MIT|N/A|
 |[react-icons](https://www.npmjs.com/react-icons)|v4.11.0|10/27/23|Miguelangel Cabrera |MIT|N/A|
@@ -268,4 +274,4 @@ Full tech stack [here](/techstack.md)
 <br/>
 <div align='center'>
 
-Generated via [Stack File](https://github.com/apps/stack-file)
+Generated via [Stack File](https://github.com/marketplace/stack-file)
